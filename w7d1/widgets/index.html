@@ -7,7 +7,11 @@
     <title></title>
   </head>
   <body>
-    <div id="widgets">
+    <div id="autocomplete">
+
+    </div>
+
+    <div id="weather">
 
     </div>
 
@@ -19,6 +23,7 @@
 
         handleClick: function(event){
           event.preventDefault();
+          this.setState({ searchString: event.target.textContent })
         },
 
         handleChange: function(event) {
@@ -44,9 +49,9 @@
                      value={this.state.searchString}
                      onChange={this.handleChange} />
               <ul>
-                { names.map(function(name) {
-                    return <li>{name}</li>
-                  })
+                { names.map(function(n) {
+                    return <li onClick={this.handleClick} >{n}</li>
+                  }.bind(this))
                 }
               </ul>
             </div>
@@ -63,8 +68,30 @@
                  ];
 
       React.render( <Autocomplete names={names} />,
-        document.getElementById('widgets')
+        document.getElementById('autocomplete')
       );
+
+      var Clock = React.createClass({
+        getInitialState: function() {
+          return { time: new Date() };
+        },
+
+        componentDidMount: function() {
+          this.timer = setInterval(this.tick, 1000);
+        },
+
+        render: function() {
+          return (
+            <div>
+
+            </div>
+          )
+        }
+      });
+
+      // React.render( <Weather/>,
+      //   document.getElementById("weather")
+      // );
     </script>
   </body>
 </html>
