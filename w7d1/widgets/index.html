@@ -14,7 +14,7 @@
     <script type="text/jsx">
       var Autocomplete = React.createClass({
         getInitialState: function(){
-          return "";
+          return { searchString: "" };
         },
 
         handleClick: function(event){
@@ -23,21 +23,31 @@
 
         handleChange: function(event) {
           event.preventDefault();
-
+          this.setState({ searchString: event.target.value })
         },
 
         render: function(){
+          var names = this.props.names;
+          var searchString = this.state.searchString.trim().toLowerCase();
+
+          if (searchString.length > 0){
+
+            names = names.filter(function(name){
+                return name.toLowerCase().match( searchString );
+            });
+
+          }
+
           return (
             <div>
-              <input type="text" onChange={this.handleChange}>
+              <input type="text"
+                     value={this.state.searchString}
+                     onChange={this.handleChange} />
               <ul>
-                this.props.names.forEach(function(name){
-                  if (name.indexOf(this.state) >= 0) {
-                    <li onClick={this.handleClick} > {name} </li>
-                  } else {
-                    return false
-                  }
-                }.bind(this))
+                { names.map(function(name) {
+                    return <li>{name}</li>
+                  })
+                }
               </ul>
             </div>
           );
@@ -50,7 +60,7 @@
                    "Max",
                    "Matt",
                    "Rehan"
-                  ]
+                 ];
 
       React.render( <Autocomplete names={names} />,
         document.getElementById('widgets')
