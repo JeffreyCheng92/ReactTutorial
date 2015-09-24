@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div id="widgets">
+
+    </div>
+
+    <script type="text/jsx">
+      var Autocomplete = React.createClass({
+        getInitialState: function(){
+          return "";
+        },
+
+        handleClick: function(event){
+          event.preventDefault();
+        },
+
+        handleChange: function(event) {
+          event.preventDefault();
+
+        },
+
+        render: function(){
+          return (
+            <div>
+              <input type="text" onChange={this.handleChange}>
+              <ul>
+                this.props.names.forEach(function(name){
+                  if (name.indexOf(this.state) >= 0) {
+                    <li onClick={this.handleClick} > {name} </li>
+                  } else {
+                    return false
+                  }
+                }.bind(this))
+              </ul>
+            </div>
+          );
+        }
+      });
+
+      var names = ["Jeff",
+                   "Robert",
+                   "Jennifer",
+                   "Max",
+                   "Matt",
+                   "Rehan"
+                  ]
+
+      React.render( <Autocomplete names={names} />,
+        document.getElementById('widgets')
+      );
+    </script>
+  </body>
+</html>
