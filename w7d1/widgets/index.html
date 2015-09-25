@@ -14,7 +14,33 @@
 
     <script type="text/jsx">
       var Tabs = React.createClass({
+        getInitialState: function() {
+          // console.log(Object.keys(this.props.tabs[0]))
+          return { selected: Object.keys(this.props.tabs[0])[0] }
+        },
 
+        handleClick: function(event) {
+          event.preventDefault();
+          this.setState({ selected: event.target.textContent});
+        },
+
+        render: function() {
+          var tabs = Object.keys(this.props.tabs[0]);
+          var self = this;
+
+          return(
+            <div className="container">
+              { tabs.map(function(tab) {
+                return <div onClick={self.handleClick}> {tab} </div>
+              }) }
+
+              <div>
+                { this.props.tabs[0][this.state.selected] }
+              </div>
+            </div>
+
+          )
+        }
 
       });
 
