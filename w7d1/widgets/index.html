@@ -85,10 +85,9 @@
 
         componentDidMount: function() {
           this.getLoc();
-          this.getWeather(this.state.loc)
+          this.timer = setInterval(this.getLoc, 300000);
           this.timer = setInterval(this.tick, 1000);
         },
-
 
         componentWillUnmount: function() {
           clearInterval(this.timer);
@@ -103,6 +102,7 @@
           navigator.geolocation.getCurrentPosition( function(pos) {
             position = pos.coords.latitude + " " + pos.coords.longitude
             self.setState({loc: position})
+            self.getWeather(self.state.loc)
           })
         },
 
