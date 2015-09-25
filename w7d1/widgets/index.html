@@ -94,12 +94,6 @@
           clearInterval(this.timer);
         },
 
-        componentWillReceiveProps: function(nextProps) {
-          // if (this.state.loc != "") {
-            this.getWeather(this.state.loc)
-          // }
-        },
-
         tick: function() {
           this.setState({ time: new Date() });
         },
