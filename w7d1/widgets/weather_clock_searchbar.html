@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://fb.me/react-0.13.3.js"></script>
+    <script src="https://fb.me/JSXTransformer-0.13.3.js"></script>
+    <title></title>
+  </head>
+  <body>
+    <div id="autocomplete">
+
+    </div>
+
+    <div id="weather">
+
+    </div>
+
+    <script type="text/jsx">
+      var Autocomplete = React.createClass({
+        getInitialState: function(){
+          return { searchString: "" };
+        },
+
+        handleClick: function(event){
+          event.preventDefault();
+          this.setState({ searchString: event.target.textContent });
+        },
+
+        handleChange: function(event) {
+          event.preventDefault();
+          this.setState({ searchString: event.target.value })
+        },
+
+        render: function(){
+          var names = this.props.names;
+          var searchString = this.state.searchString.trim().toLowerCase();
+
+          if (searchString.length > 0){
+
+            names = names.filter(function(name){
+                return name.toLowerCase().match( searchString );
+            });
+
+          }
+
+          return (
+            <div>
+              <input type="text"
+                     value={this.state.searchString}
+                     onChange={this.handleChange} />
+              <ul>
+                { names.map(function(n) {
+                    return <li onClick={this.handleClick} >{n}</li>
+                  }.bind(this))
+                }
+              </ul>
+            </div>
+          );
+        }
+      });
+
+      var names = ["Jeff",
+                   "Robert",
+                   "Jennifer",
+                   "Max",
+                   "Matt",
+                   "Rehan"
+                 ];
+
+      React.render( <Autocomplete names={names} />,
+        document.getElementById('autocomplete')
+      );
+
+      var WeatherClock = React.createClass({
+        getInitialState: function() {
+          return { time: new Date(),
+                   loc: "",
+                   currentTemp: "",
+                   lowTemp: "",
+                   highTemp: "",
+                   desc: "",
+                   locName: ""
+                 };
+        },
+
+        componentDidMount: function() {
+          this.getLoc();
+          this.timer = setInterval(this.getLoc, 300000);
+          this.timer = setInterval(this.tick, 1000);
+        },
+
+        componentWillUnmount: function() {
+          clearInterval(this.timer);
+        },
+
+        tick: function() {
+          this.setState({ time: new Date() });
+        },
+
+        getLoc: function() {
+          var self = this;
+          navigator.geolocation.getCurrentPosition( function(pos) {
+            position = pos.coords.latitude + " " + pos.coords.longitude
+            self.setState({loc: position})
+            self.getWeather(self.state.loc)
+          })
+        },
+
+        getWeather: function(coords) {
+          var coordinates = coords.split(" ");
+          var lat = coordinates[0];
+          var lon = coordinates[1];
+          var url = "http://api.openweathermap.org/data/2.5/weather?lat=" +
+                    lat + "&lon=" + lon + "&units=imperial"
+
+          var xmlhttp = new XMLHttpRequest();
+          xmlhttp.open('GET', url, true);
+          xmlhttp.onload = function() {
+            if (xmlhttp.status >= 200 && xmlhttp.status < 400) {
+              var resp = JSON.parse(xmlhttp.responseText);
+
+              var temp = resp.main;
+              this.setState({
+                            currentTemp: "Current Temperature: " + temp.temp
+                          });
+              this.setState({ lowTemp: "Today's low: " + temp.temp_min });
+              this.setState({ highTemp: "Today's high: " + temp.temp_max });
+
+              var weather = resp.weather;
+              this.setState({ desc: "Description: " + weather[0].description });
+              this.setState({ locName: "Location: " + resp.name });
+            } else {
+              console.log("error");
+            }
+          }.bind(this);
+
+          xmlhttp.onerror = function() {
+            console.log("connection error");
+          };
+
+          xmlhttp.send();
+
+        },
+
+        render: function() {
+          return (
+            <div>
+              <div>
+                Today is {this.state.time.toDateString()} and {this.state.time.toTimeString()}.
+              </div>
+              <div>
+                It is currently {this.state.currentTemp}. The highs and lows are {this.state.highTemp} and {this.state.lowTemp}. {this.state.desc} at {this.state.locName}.
+              </div>
+            </div>
+          )
+        }
+      });
+
+      React.render( <WeatherClock/>,
+        document.getElementById("weather")
+      );
+
+      
+    </script>
+  </body>
+</html>
