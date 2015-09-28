@@ -1,5 +1,5 @@
-var AppDispatcher = require('../dispatcher/AppDispatcher');
-var KeyConstants = require('../constants/KeyConstants');
+// var AppDispatcher = require('../dispatcher/AppDispatcher');
+// var KeyConstants = require('../constants/KeyConstants');
 
 (function() {
 
@@ -18,6 +18,10 @@ var KeyConstants = require('../constants/KeyConstants');
       note: key
     });
   };
+
+  document.addEventListener("keydown", function(event) {
+    event.preventDefault();
+  });
 
 
 })();
