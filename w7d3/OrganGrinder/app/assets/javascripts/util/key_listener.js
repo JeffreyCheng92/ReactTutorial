@@ -3,25 +3,13 @@
 
 (function() {
 
-  window.KeyActions = function(){};
-
-  window.KeyActions.prototype.keyDown = function(key){
-    AppDispatcher.dispatch({
-      actionType: KeyConstants.KEY_CREATE,
-      note: key
-    });
-  };
-
-  window.KeyActions.prototype.keyUp = function(key){
-    AppDispatcher.dispatch({
-      actionType: KeyConstants.KEY_DESTROY,
-      note: key
-    });
-  };
-
   document.addEventListener("keydown", function(event) {
     event.preventDefault();
+    console.log(event.keyCode);
   });
 
-
+  document.addEventListener("keyup", function(event) {
+    event.preventDefault();
+    console.log(event.keyCode);
+  });
 })();
