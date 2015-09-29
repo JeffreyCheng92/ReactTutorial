@@ -32,6 +32,3 @@ AppDispatcher.register(function(action) {
       // no op
   }
 });
-
-
-module.exports = KeyStore;

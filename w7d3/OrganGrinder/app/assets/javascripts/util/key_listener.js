@@ -1,6 +1,3 @@
-// var AppDispatcher = require('../dispatcher/AppDispatcher');
-// var KeyConstants = require('../constants/KeyConstants');
-
 (function() {
 
   document.addEventListener("keydown", function(event) {

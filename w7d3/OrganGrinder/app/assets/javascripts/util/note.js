@@ -3,8 +3,8 @@
 
   window.Note = function(frequency){
     this.freq = frequency;
-    this.oscillatorNode = this.createOscillator(this.freq);
-    this.gainNode = this.createGainNode(this.freq);
+    this.oscillatorNode = createOscillator(this.freq);
+    this.gainNode = createGainNode(this.freq);
     this.oscillatorNode.connect(this.gainNode);
   };
 
@@ -16,7 +16,7 @@
     this.gainNode.gain.value = 0;
   };
 
-  window.Note.prototype.createOscillator = function (freq) {
+  var createOscillator = function (freq) {
     var osc = ctx.createOscillator();
     osc.type = "sine";
     osc.frequency.value = freq;
@@ -25,16 +25,11 @@
     return osc;
   };
 
-  window.Note.prototype.createGainNode = function () {
+  var createGainNode = function () {
     var gainNode = ctx.createGain();
     gainNode.gain.value = 0;
     gainNode.connect(ctx.destination);
     return gainNode;
   };
-
-  // function window.Note(frequency){
-  //   this.freq = frequency;
-  // }
-
 
 })();
