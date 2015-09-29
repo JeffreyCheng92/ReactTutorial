@@ -22,7 +22,6 @@
       _heldKeys.push(code);
       KeyActions.keyDown(NOTE_MAP[code]);
     }
-
   });
 
   document.addEventListener("keyup", function(event) {
@@ -34,7 +33,6 @@
       _heldKeys.splice(idx, 1);
       KeyActions.keyUp(NOTE_MAP[code]);
     }
-
   });
 
 })();
