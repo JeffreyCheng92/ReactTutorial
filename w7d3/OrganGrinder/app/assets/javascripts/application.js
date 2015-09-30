@@ -17,5 +17,5 @@
 //= require turbolinks
 //= require flux
 //= require eventemitter
-//= require components
+//= require app
 //= require_tree .

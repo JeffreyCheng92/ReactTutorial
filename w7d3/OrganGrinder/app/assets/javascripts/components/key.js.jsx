@@ -4,7 +4,7 @@ var Key = React.createClass({
   },
 
   componentDidMount: function () {
-    this.note = new Note(TONES[this.props.noteName]);
+    this.note = new Note(TONES[this.props.note]);
     KeyStore.addChangeListener(this._onChange);
   },
 
@@ -14,17 +14,16 @@ var Key = React.createClass({
   },
 
   _onChange: function() {
-    var pressed = this.keyPressed;
+    var pressed = this.keyPressed();
     if (pressed) {
-      this.note.stop();
-    } else {
       this.note.start();
+    } else {
+      this.note.stop();
     }
     this.setState({ pressed: pressed });
   },
 
   render: function() {
-
     return (
       <div>
         { this.props.note }

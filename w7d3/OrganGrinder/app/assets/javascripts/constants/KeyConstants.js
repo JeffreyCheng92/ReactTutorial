@@ -1,4 +1,4 @@
-module.exports = keyMirror({
+KeyConstants = {
   KEYS_CREATE: "KEYS_CREATE",
   KEYS_DESTROY: "KEYS_DESTROY",
-});
+};

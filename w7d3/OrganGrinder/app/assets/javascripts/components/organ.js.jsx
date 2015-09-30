@@ -10,9 +10,10 @@ var Organ = React.createClass({
   render: function() {
     return(
       <div>
+      <h1> Organ Grinding Magic </h1>
         {
           Object.keys(TONES).map(function(tone) {
-            return (<key note={tone} key={tone} />);
+            return (<Key note={tone} key={tone} />);
           })
         }
       </div>
