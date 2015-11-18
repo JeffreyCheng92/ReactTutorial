@@ -47,4 +47,6 @@
     }),
 
   });
+
+  root.KeyStore.setMaxListeners(15);
 })(this);
