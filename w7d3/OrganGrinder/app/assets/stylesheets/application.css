@@ -13,3 +13,11 @@
  *= require_tree .
  *= require_self
  */
+
+.white-key {
+  background-color: white;
+}
+
+.red-key {
+  background-color: red;
+}

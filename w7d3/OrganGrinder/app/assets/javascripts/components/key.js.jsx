@@ -1,6 +1,6 @@
 var Key = React.createClass({
   getInitialState: function() {
-    return { pressed: this.keyPressed };
+    return { pressed: this.keyPressed() };
   },
 
   componentDidMount: function () {
@@ -23,9 +23,17 @@ var Key = React.createClass({
     this.setState({ pressed: pressed });
   },
 
+  _pressed: function() {
+    if (this.state.pressed) {
+      return "red-key"
+    } else {
+      return "white-key"
+    }
+  },
+
   render: function() {
     return (
-      <div>
+      <div className={ this._pressed() }>
         { this.props.note }
       </div>
     )
