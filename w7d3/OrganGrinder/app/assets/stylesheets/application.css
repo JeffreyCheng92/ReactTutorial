@@ -1,26 +1,20 @@
 /*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
- * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
- * file per style scope.
- *
  *= require_tree .
  *= require_self
  */
 
+ .content {
+   text-align: center;
+ }
+
 
 .white-box.red-key {
-  /*background-color: red;*/
+  background-color: #ffff80;
   top: 2px;
 }
 
 .black-box.red-key {
+  background-color: grey;
   padding-bottom: 2px;
   box-shadow: none;
 }
@@ -66,6 +60,4 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  /*text-align: center;*/
-  /*transform: translateX(-50%);*/
 }

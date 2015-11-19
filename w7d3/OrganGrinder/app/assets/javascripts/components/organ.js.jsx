@@ -27,9 +27,9 @@ var Organ = React.createClass({
 
   render: function() {
     return(
-      <div >
-        <h1> Organ Grinding Magic </h1>
-          <div className="organ">
+      <div className="content">
+        <h1> Origano </h1>
+          <div>
           {
             Object.keys(TONES).map(function(tone) {
               return (<Key note={tone}
